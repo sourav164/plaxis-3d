@@ -2,7 +2,17 @@ import os, shutil
 import numpy as np
 # from plxscripting.easy import *
 
-file_path = "C:/Users/sourav/Downloads/Cell127_real properties_python.p3d"
+
+# change working directory to the folder location
+file_path = "C:/Users/sourav/Downloads/rainfall analysis/Cell127_real properties_python.p3d"
+folder_loc , file_loc = os.path.split(file_path)
+os.chdir(folder_loc)
+
+if not os.path.exists("out") :
+	os.makedirs("out")
+
+
+
 sres = np.linspace(0.01, 0.1, num=2)
 gn = np.linspace(1, 10, num=2)
 ga = np.linspace(1, 4, num=2)
@@ -39,8 +49,14 @@ for sres_val in sres:
 					g_i.calculate()
 					g_i.save()
 
-					file_name = "out/"+str(sres_val)+str(gn_val)+str(ga_val)+str(gl_val)+str(kx_val)+".p3d"
-					copy_file = os.path.join(os.path.split(file_path)[0], file_name)
-					shutil.copy2(file_path, copy_file)
 
-					print (f'File saved in : {copy_file}') 
+					# give new name and save data
+					copy_name = str(sres_val)+str(gn_val)+str(ga_val)+str(gl_val)+str(kx_val)
+					
+					file_save = "out/"+copy_name+".p3d"
+					shutil.copy2(file_loc, file_save)
+
+					folder_save = "out/"+copy_name+".p3dat"
+					shutil.copytree((file_loc+"at"), folder_save)
+
+					print (f'File saved in : \"out/\"') 
