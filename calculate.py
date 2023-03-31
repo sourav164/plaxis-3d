@@ -21,13 +21,14 @@ kx = np.linspace(.001, 1, num=2)
 
 simulation = len(sres)*len(gn)*len(ga)*len(gl)*len(kx)
 
-i = 0
+i = 1
 for sres_val in sres:
 	for gn_val in gn:
 		for ga_val in gn:
 			for gl_val in gl:
 				for kx_val in kx:
 					print (f'{i} out of {simulation} simulation is being conducted') 
+					i+=1
 
 					g_i.gotosoil()
 
