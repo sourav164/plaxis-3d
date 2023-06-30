@@ -1,14 +1,14 @@
-import os, shutil, glob
+import os, shutil
 import numpy as np
 # from plxscripting.easy import *
 
 
 # change working directory to the folder location
-file_path = "C:/Users/sourav/Downloads/USB Jibon/Final combination_Cell188_Jibon_2_21_may2020_raifall_actual properties.p3d"
+file_path = "C:/Users/sourav/Downloads/Cell188/Cell188_rain1inperhr.p3d"
 folder_loc , file_loc = os.path.split(file_path)
 os.chdir(folder_loc)
 log_file = "error_details.txt"
-server_location = "C:/Users/sourav/Box/2021 - MnDOT - Freeze-Thaw Cycle - Phase 2/Code/plaxis results/server_cell188"
+server_location = "C:/Users/sourav/Box/2021 - MnDOT - Freeze-Thaw Cycle - Phase 2/Code/plaxis results/188_precipitation"
 
 if not os.path.exists(log_file) :
     open(log_file, 'a').close()
@@ -18,16 +18,14 @@ if not os.path.exists("out") :
 	os.makedirs("out")
 
 
-sres = [.01, .05]
-gn = [3, 4, 5, 6]
-ga = [1.25, 1.5, 2.0,2.5]
-gl = [-2, -1, 0]
-kx = [.001,.002, 0.05, 0.1,0.2]
+sres = [.089]
+gn = [3.5]
+ga = [2.64]
+gl = [-0.25]
+kx = [.5, .6, .7, .8, .9, 1, 1.1, 1.2, 1.3, 1.4, 1.5]
+precipitation = [0.6, 1.2, 1.8, 2.4, 3, 3.6, 4.2, 4.8, 5.4, 6]
 
 simulation = len(sres)*len(gn)*len(ga)*len(gl)*len(kx)
-
-already_run = [os.path.split(i[:-4])[1] for i in glob.glob("out/*p3d")]
-
 
 i = 1
 for sres_val in sres:
@@ -35,23 +33,22 @@ for sres_val in sres:
 		for ga_val in gn:
 			for gl_val in gl:
 				for kx_val in kx:
-					print (f'{i} out of {simulation} simulation is being conducted') 
-					i+=1
-					copy_name = str(sres_val)+"_"+str(gn_val)+"_"+str(ga_val)+"_"+str(gl_val)+"_"+str(kx_val)
-					print (copy_name)
+					for precipitation_val in precipitation:
+						print (f'{i} out of {simulation} simulation is being conducted') 
+						i+=1
 
-					if copy_name not in already_run:
+						copy_name = str(sres_val)+"_"+str(gn_val)+"_"+str(ga_val)+"_"+str(gl_val)+"_"+str(kx_val)+str(precipitation_val)
 
 						try:
 							g_i.gotosoil()
 
-							g_i.Asphalt.SaturationResidual.set(sres_val)
-							g_i.Asphalt.GenuchtenGn.set(gn_val)
-							g_i.Asphalt.GenuchtenGa.set(ga_val)
-							g_i.Asphalt.GenuchtenGl.set(gl_val)
-							g_i.Asphalt.PermHorizontalPrimary.set(kx_val)
-							g_i.Asphalt.PermHorizontalSecondary.set(kx_val)
-							g_i.Asphalt.PermVertical.set(kx_val)
+							g_i.Subbase.SaturationResidual.set(sres_val)
+							g_i.Subbase.GenuchtenGn.set(gn_val)
+							g_i.Subbase.GenuchtenGa.set(ga_val)
+							g_i.Subbase.GenuchtenGl.set(gl_val)
+							g_i.Subbase.PermHorizontalPrimary.set(kx_val)
+							g_i.Subbase.PermHorizontalSecondary.set(kx_val)
+							g_i.Subbase.PermVertical.set(kx_val)
 
 							g_i.gotostages()
 
@@ -60,7 +57,7 @@ for sres_val in sres:
 							g_i.Phase_2.ShouldCalculate.set(True)
 							g_i.Phase_3.ShouldCalculate.set(True)
 							g_i.Phase_4.ShouldCalculate.set(True)
-							
+							g_i.Precipitation.Discharge.Phase_4 = precipitation_val
 							g_i.calculate()
 							g_i.save()
 

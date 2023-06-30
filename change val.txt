@@ -1,0 +1,18 @@
+2950> _set DischargeFunction_2.Signal "Table"
+DischargeFunction_2.Signal: Table (1)
+2951> _add DischargeFunction_2.Table
+OK
+2952> _add DischargeFunction_2.Table
+OK
+2953> _set DischargeFunction_2.Table[1].Time 0.01
+DischargeFunction_2.Table[1].Time: 0.01
+2954> _set DischargeFunction_2.Table[1].DeltaDischarge 0.06
+DischargeFunction_2.Table[1].DeltaDischarge: 0.06
+2955> _set DischargeFunction_2.Table[0].DeltaDischarge 0.06
+DischargeFunction_2.Table[0].DeltaDischarge: 0.06
+2956> _set DischargeFunction_2.Table[1].Time 0.2
+DischargeFunction_2.Table[1].Time: 0.2
+2957> _set DischargeFunction_2.Table[0].DeltaDischarge 0.5
+DischargeFunction_2.Table[0].DeltaDischarge: 0.5
+2958> _set DischargeFunction_2.Table[1].DeltaDischarge 0.5
+DischargeFunction_2.Table[1].DeltaDischarge: 0.5

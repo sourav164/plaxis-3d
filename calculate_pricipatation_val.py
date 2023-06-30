@@ -18,7 +18,7 @@ if not os.path.exists("out") :
 	os.makedirs("out")
 
 
-sres = [.01, .05]
+sres = [.05]
 gn = [3, 4, 5, 6]
 ga = [1.25, 1.5, 2.0,2.5]
 gl = [-2, -1, 0]
