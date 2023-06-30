@@ -1,15 +1,22 @@
-
-hc_val = 
-time = 
-base_val = 
-sub_grade = 
-sub_val = 
+# range values
+rainfall = 0.1
+time = 0.2
 
 
-g_i.DischargeFunction_9.Table[0].DeltaDischarge.set(hc_val)
-g_i.DischargeFunction_9.Table[1].DeltaDischarge.set(hc_val)
-g_i.DischargeFunction_9.Table[1].Time(time)
-g_i.Precipitation.DischargeFunction Phase_4 DischargeFunction_9
+base_val = 0.3 
+sub_grade =  0.4
+sub_val = 0.5
+
+
+
+
+
+# discharge function selection
+
+g_i.Precipitation.DischargeFunction.Phase_4 = g_i.DischargeFunction_9 #check this
+g_i.DischargeFunction_9.Table[0].DeltaDischarge.set(rainfall)
+g_i.DischargeFunction_9.Table[1].DeltaDischarge.set(rainfall)
+g_i.DischargeFunction_9.Table[1].Time.set(time)
 
 
 
@@ -45,3 +52,7 @@ g_i.Phase_4.ShouldCalculate.set(True)
 
 g_i.calculate()
 g_i.save()
+
+
+
+Precipitation.DischargeFunction Phase_4 DischargeFunction_9.set()
