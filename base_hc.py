@@ -5,12 +5,12 @@ import glob
 # SET DischargeFunction_9 MANUALLY BEFORE RUNNING THIS CODE
 
 # USER INPUT STARTS 
-file_path = "C:/Users/sourav/Downloads/USB Jibon/Final combination_Cell188_Jibon_2_21_may2020_raifall_actual properties.p3d"
-rainfall = []
-times = []
-bases = []
-sub_grades =  []
-sub_bases = []
+file_path = r"C:\Users\sourav\Downloads\Plaxis\Cell189_rain1inperhr.p3d"
+rainfall = [.2, .3]
+times = [.5]
+bases = [.6, .7]
+sub_grades =  [.8]
+sub_bases = [1, 1.2]
 
 # USER INPUT ENDS 
 
@@ -31,7 +31,7 @@ for value in value_combination:
 	rain, time, base_val, sub_grade, sub_base = value
 	copy_name = str(rain)+"_"+str(time)+"_"+str(base_val)+"_"+str(sub_grade)+"_"+str(sub_base)
 
-	print (copy_name, value_combination.index(value), " out of ", len(value_combination))
+	print (copy_name, value_combination.index(value)+1, " out of ", len(value_combination))
 
 	if copy_name not in already_run:
 		try: 
@@ -80,4 +80,3 @@ for value in value_combination:
 		except Exception as e:
 			print (copy_name, " not ran")
 			pass
-
