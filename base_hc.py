@@ -23,8 +23,8 @@ if not os.path.exists("out") :
 already_run = [os.path.split(i[:-4])[1] for i in glob.glob("out/*p3d")]
 
 
-value_combination = [(rain, time, base_val, sub_grade, sub_base) for rain in rainfall for t in times 
-					for base in bases for sub_grade in sub_grades for sub_base in sub_bases]
+value_combination = [(rain, time, base_val, sub_grade, sub_base) for rain in rainfall for time in times 
+					for base_val in bases for sub_grade in sub_grades for sub_base in sub_bases]
 
 for value in value_combination:
 
