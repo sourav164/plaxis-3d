@@ -1,7 +1,8 @@
-import os, shutil, glob
-import numpy as np
-# from plxscripting.easy import *
+import os
+import shutil
+import glob
 
+# SET DischargeFunction_9 MANUALLY BEFORE RUNNING THIS CODE
 
 # USER INPUT STARTS 
 file_path = "C:/Users/sourav/Downloads/USB Jibon/Final combination_Cell188_Jibon_2_21_may2020_raifall_actual properties.p3d"
@@ -14,7 +15,6 @@ sub_bases = []
 # USER INPUT ENDS 
 
 
-
 folder_loc , file_loc = os.path.split(file_path)
 os.chdir(folder_loc)
 
@@ -24,7 +24,7 @@ already_run = [os.path.split(i[:-4])[1] for i in glob.glob("out/*p3d")]
 
 
 value_combination = [(rain, time, base_val, sub_grade, sub_base) for rain in rainfall for time in times 
-					for base_val in bases for sub_grade in sub_grades for sub_base in sub_bases]
+		     for base_val in bases for sub_grade in sub_grades for sub_base in sub_bases]
 
 for value in value_combination:
 
@@ -81,4 +81,3 @@ for value in value_combination:
 			print (copy_name, " not ran")
 			pass
 
-# Precipitation.DischargeFunction Phase_4 DischargeFunction_9.set()
